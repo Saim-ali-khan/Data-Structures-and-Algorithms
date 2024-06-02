@@ -1,4 +1,5 @@
 #include<iostream>
+#include<conio.h>
 using namespace std;
 
 void printPeak(int ary[],int n){
@@ -28,7 +29,9 @@ void printPeak(int ary[],int n){
 
 int main()
 {
+    getch();
     int ary[10]={3,1,4,3,2,5,2,4,2,9};
     printPeak(ary,10);
+    getch();
     return 0;
 }
