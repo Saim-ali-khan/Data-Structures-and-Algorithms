@@ -42,15 +42,13 @@ public:
         top = nullptr;
         len = 0;
     }
-    Stack(X dat)
-    {
-    }
+    
     void push(X dat)
     {
         Node<X> *ptr = new Node<X>(dat);
         if (top != nullptr)
         {
-            Node<X> *temp = top;
+            Node<X> *temp = top->giveNext();
             top->setNext(ptr);
             ptr->setNext(temp);
         }
@@ -88,10 +86,11 @@ public:
         Node<X> *ptr = top;
         while (ptr != nullptr)
         {
-            cout << X(ptr->giveData()) << "  ";
+            cout << ptr->giveData() << "  ";
             ptr = ptr->giveNext();
         }
     }
+    
 };
 
 bool operato(char a)
@@ -121,44 +120,59 @@ int prec(char c)
     else 
         return -1;
 }
+int main(){
+    
+    cout<<endl;
+    Stack<int> stk;
+    stk.print();
+    stk.push(45);
+    stk.push(32);
+    stk.print();
+    stk.pop();
+    stk.pop();
+    stk.pop();
+    stk.print();
+    cout<<endl;
 
-int main()
-{
-    Stack<char> operators;
-    char exp[8] = "a+b*c-d";
-    char postexp[8];
-    int k = 0;
-    for (int i = 0; i < 7; i++)
-    {
-        if (! operato(exp[i]))
-        {
-            postexp[k] = exp[i];
-            k++;
-        }
-        else
-        {
-            if (operators.length() == 0 || prec(operators.peek()) <= prec(exp[i]))
-            {
-                operators.push(exp[i]);
-            }
-            else if (prec(operators.peek()) > prec(exp[i]))
-            {
-                while (operators.length() != 0)
-                {
-                    postexp[k] = operators.peek();
-                    operators.pop();
-                    k++;
-                    
-                }
-                operators.push(exp[i]);
-            }
-        }
-    }
-    while (operators.length() != 0)
-    {
-        postexp[k] = operators.peek();
-        operators.pop();
-        k++;
-    }
-    cout<<postexp;
 }
+// int main()
+// {
+//     cout<<endl;
+//     Stack<char> operators;
+//     char exp[8] = "a+b*c-d";
+//     char postexp[8];
+//     int k = 0;
+//     for (int i = 0; i < 7; i++)
+//     {
+//         if (! operato(exp[i]))
+//         {
+//             postexp[k] = exp[i];
+//             k++;
+//         }
+//         else
+//         {
+//             if (operators.length() == 0 || prec(operators.peek()) <= prec(exp[i]))
+//             {
+//                 operators.push(exp[i]);
+//             }
+//             else if (prec(operators.peek()) > prec(exp[i]))
+//             {
+//                 while (operators.length() != 0)
+//                 {
+//                     postexp[k] = operators.peek();
+//                     operators.pop();
+//                     k++;
+                    
+//                 }
+//                 operators.push(exp[i]);
+//             }
+//         }
+//     }
+//     while (operators.length() != 0)
+//     {
+//         postexp[k] = operators.peek();
+//         operators.pop();
+//         k++;
+//     }
+//     cout<<postexp;
+// }
